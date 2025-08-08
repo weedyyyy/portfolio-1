@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name      String
+  email     String
+  message   String
+}
+
+model PersonalInfo {
+  id           Int      @id @default(autoincrement())
+  name         String
+  initials     String
+  url          String
+  location     String
+  locationLink String?
+  description  String
+  summary      String
+  avatarUrl    String?
+  updatedAt    DateTime @updatedAt
+}
+
+model Skill {
+  id       Int     @id @default(autoincrement())
+  name     String
+  icon     String
+  category String?
+}
+
+model WorkExperience {
+  id          Int      @id @default(autoincrement())
+  company     String
+  title       String
+  logoUrl     String?
+  href        String?
+  description String
+  start       String
+  end         String?
+  badges      String[]
+  order       Int      @default(0)
+}
+
+model Education {
+  id      Int     @id @default(autoincrement())
+  school  String
+  degree  String
+  logoUrl String?
+  href    String?
+  start   String
+  end     String
+  order   Int     @default(0)
+}
+
+model Project {
+  id           Int      @id @default(autoincrement())
+  title        String
+  slug         String   @unique
+  description  String
+  dates        String?
+  image        String?
+  video        String?
+  technologies String[]
+  links        Json?
+  featured     Boolean  @default(false)
+  order        Int      @default(0)
+}
+
+model Language {
+  id       Int     @id @default(autoincrement())
+  name     String
+  level    String
+  flagIcon String?
+}
+
+model Hackathon {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  location    String
+  dates       String
+  image       String?
+  links       Json?
+  order       Int     @default(0)
+}
